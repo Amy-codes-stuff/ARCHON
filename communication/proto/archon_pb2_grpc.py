@@ -34,6 +34,11 @@ class ArchonCoordinatorStub:
         Args:
             channel: A grpc.Channel.
         """
+        self.RegisterNode = channel.unary_unary(
+                '/archon.ArchonCoordinator/RegisterNode',
+                request_serializer=archon__pb2.NodeRegistration.SerializeToString,
+                response_deserializer=archon__pb2.NodeRegistrationResponse.FromString,
+                _registered_method=True)
         self.GetZoneStatus = channel.unary_unary(
                 '/archon.ArchonCoordinator/GetZoneStatus',
                 request_serializer=archon__pb2.ZoneRequest.SerializeToString,
@@ -44,6 +49,12 @@ class ArchonCoordinatorStub:
 class ArchonCoordinatorServicer:
     """Missing associated documentation comment in .proto file."""
 
+    def RegisterNode(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
     def GetZoneStatus(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
@@ -53,6 +64,11 @@ class ArchonCoordinatorServicer:
 
 def add_ArchonCoordinatorServicer_to_server(servicer, server):
     rpc_method_handlers = {
+            'RegisterNode': grpc.unary_unary_rpc_method_handler(
+                    servicer.RegisterNode,
+                    request_deserializer=archon__pb2.NodeRegistration.FromString,
+                    response_serializer=archon__pb2.NodeRegistrationResponse.SerializeToString,
+            ),
             'GetZoneStatus': grpc.unary_unary_rpc_method_handler(
                     servicer.GetZoneStatus,
                     request_deserializer=archon__pb2.ZoneRequest.FromString,
@@ -68,6 +84,33 @@ def add_ArchonCoordinatorServicer_to_server(servicer, server):
  # This class is part of an EXPERIMENTAL API.
 class ArchonCoordinator:
     """Missing associated documentation comment in .proto file."""
+
+    @staticmethod
+    def RegisterNode(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/archon.ArchonCoordinator/RegisterNode',
+            archon__pb2.NodeRegistration.SerializeToString,
+            archon__pb2.NodeRegistrationResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
 
     @staticmethod
     def GetZoneStatus(request,

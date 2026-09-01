@@ -1,4 +1,5 @@
 services:
+
   rabbitmq:
     image: rabbitmq:3-management
     container_name: archon-rabbitmq
@@ -8,3 +9,39 @@ services:
     environment:
       RABBITMQ_DEFAULT_USER: archon
       RABBITMQ_DEFAULT_PASS: archon123
+
+  coordinator:
+    build: .
+    container_name: archon-coordinator
+    command: python3 -m coordinator.coordinator
+    ports:
+      - "5000:5000"
+    depends_on:
+      - rabbitmq
+
+  zone_a:
+    build: .
+    container_name: archon-zone-a
+    command: python3 nodes/node.py --id ZONE_A --host zone_a --port 5001 --coordinator coordinator
+    ports:
+      - "5001:5001"
+    depends_on:
+      - coordinator
+
+  zone_b:
+    build: .
+    container_name: archon-zone-b
+    command: python3 nodes/node.py --id ZONE_B --host zone_b --port 5002 --coordinator coordinator
+    ports:
+      - "5002:5002"
+    depends_on:
+      - coordinator
+
+  zone_c:
+    build: .
+    container_name: archon-zone-c
+    command: python3 nodes/node.py --id ZONE_C --host zone_c --port 5003 --coordinator coordinator
+    ports:
+      - "5003:5003"
+    depends_on:
+      - coordinator

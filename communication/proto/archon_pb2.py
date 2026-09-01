@@ -24,17 +24,21 @@ _sym_db = _symbol_database.Default()
 
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0c\x61rchon.proto\x12\x06\x61rchon\"\x1e\n\x0bZoneRequest\x12\x0f\n\x07node_id\x18\x01 \x01(\t\">\n\nZoneStatus\x12\x0f\n\x07node_id\x18\x01 \x01(\t\x12\x0e\n\x06status\x18\x02 \x01(\t\x12\x0f\n\x07message\x18\x03 \x01(\t2M\n\x11\x41rchonCoordinator\x12\x38\n\rGetZoneStatus\x12\x13.archon.ZoneRequest\x1a\x12.archon.ZoneStatusb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\x0c\x61rchon.proto\x12\x06\x61rchon\"?\n\x10NodeRegistration\x12\x0f\n\x07node_id\x18\x01 \x01(\t\x12\x0c\n\x04host\x18\x02 \x01(\t\x12\x0c\n\x04port\x18\x03 \x01(\x05\"<\n\x18NodeRegistrationResponse\x12\x0f\n\x07success\x18\x01 \x01(\x08\x12\x0f\n\x07message\x18\x02 \x01(\t\"\x1e\n\x0bZoneRequest\x12\x0f\n\x07node_id\x18\x01 \x01(\t\">\n\nZoneStatus\x12\x0f\n\x07node_id\x18\x01 \x01(\t\x12\x0e\n\x06status\x18\x02 \x01(\t\x12\x0f\n\x07message\x18\x03 \x01(\t2\x99\x01\n\x11\x41rchonCoordinator\x12J\n\x0cRegisterNode\x12\x18.archon.NodeRegistration\x1a .archon.NodeRegistrationResponse\x12\x38\n\rGetZoneStatus\x12\x13.archon.ZoneRequest\x1a\x12.archon.ZoneStatusb\x06proto3')
 
 _globals = globals()
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, _globals)
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'archon_pb2', _globals)
 if not _descriptor._USE_C_DESCRIPTORS:
   DESCRIPTOR._loaded_options = None
-  _globals['_ZONEREQUEST']._serialized_start=24
-  _globals['_ZONEREQUEST']._serialized_end=54
-  _globals['_ZONESTATUS']._serialized_start=56
-  _globals['_ZONESTATUS']._serialized_end=118
-  _globals['_ARCHONCOORDINATOR']._serialized_start=120
-  _globals['_ARCHONCOORDINATOR']._serialized_end=197
+  _globals['_NODEREGISTRATION']._serialized_start=24
+  _globals['_NODEREGISTRATION']._serialized_end=87
+  _globals['_NODEREGISTRATIONRESPONSE']._serialized_start=89
+  _globals['_NODEREGISTRATIONRESPONSE']._serialized_end=149
+  _globals['_ZONEREQUEST']._serialized_start=151
+  _globals['_ZONEREQUEST']._serialized_end=181
+  _globals['_ZONESTATUS']._serialized_start=183
+  _globals['_ZONESTATUS']._serialized_end=245
+  _globals['_ARCHONCOORDINATOR']._serialized_start=248
+  _globals['_ARCHONCOORDINATOR']._serialized_end=401
 # @@protoc_insertion_point(module_scope)

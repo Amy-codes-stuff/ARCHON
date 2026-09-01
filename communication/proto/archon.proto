@@ -3,7 +3,23 @@ syntax = "proto3";
 package archon;
 
 service ArchonCoordinator {
-    rpc GetZoneStatus (ZoneRequest) returns (ZoneStatus);
+
+    rpc RegisterNode (NodeRegistration)
+        returns (NodeRegistrationResponse);
+
+    rpc GetZoneStatus (ZoneRequest)
+        returns (ZoneStatus);
+}
+
+message NodeRegistration {
+    string node_id = 1;
+    string host = 2;
+    int32 port = 3;
+}
+
+message NodeRegistrationResponse {
+    bool success = 1;
+    string message = 2;
 }
 
 message ZoneRequest {
