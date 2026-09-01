@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package archon;
+
+service ArchonCoordinator {
+    rpc GetZoneStatus (ZoneRequest) returns (ZoneStatus);
+}
+
+message ZoneRequest {
+    string node_id = 1;
+}
+
+message ZoneStatus {
+    string node_id = 1;
+    string status = 2;
+    string message = 3;
+}
