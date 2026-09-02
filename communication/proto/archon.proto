@@ -7,6 +7,9 @@ service ArchonCoordinator {
     rpc RegisterNode (NodeRegistration)
         returns (NodeRegistrationResponse);
 
+    rpc Heartbeat (HeartbeatRequest)
+        returns (HeartbeatResponse);
+
     rpc GetZoneStatus (ZoneRequest)
         returns (ZoneStatus);
 }
@@ -19,6 +22,15 @@ message NodeRegistration {
 
 message NodeRegistrationResponse {
     bool success = 1;
+    string message = 2;
+}
+
+message HeartbeatRequest {
+    string node_id = 1;
+}
+
+message HeartbeatResponse {
+    bool acknowledged = 1;
     string message = 2;
 }
 

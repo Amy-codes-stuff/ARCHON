@@ -1,88 +1,95 @@
 import argparse
 import time
-from datetime import datetime
-
 import grpc
 
 from communication.proto import archon_pb2
 from communication.proto import archon_pb2_grpc
 
 
-def register_with_coordinator(node_id, host, port, coordinator_host):
+def register_with_coordinator(node_id, host, port, coordinator):
     print("[REGISTRATION] Connecting to Coordinator...")
 
-    channel = grpc.insecure_channel(
-        f"{coordinator_host}:5000"
-    )
-
+    channel = grpc.insecure_channel(f"{coordinator}:5000")
     stub = archon_pb2_grpc.ArchonCoordinatorStub(channel)
 
-    request = archon_pb2.NodeRegistration(
-        node_id=node_id,
-        host=host,
-        port=port
+    response = stub.RegisterNode(
+        archon_pb2.NodeRegistration(
+            node_id=node_id,
+            host=host,
+            port=port
+        )
     )
 
-    response = stub.RegisterNode(request)
-
     if response.success:
-        print(f"[REGISTRATION] {response.message}")
+        print(f"[REGISTRATION] {node_id} registered successfully")
+        return stub
     else:
-        print("[REGISTRATION] Registration failed")
+        print(f"[REGISTRATION] Failed: {response.message}")
+        return None
+
+
+def send_heartbeat(stub, node_id):
+    try:
+        response = stub.Heartbeat(
+            archon_pb2.HeartbeatRequest(
+                node_id=node_id
+            )
+        )
+
+        if response.acknowledged:
+            print(f"[HEARTBEAT] {node_id} acknowledged")
+
+    except grpc.RpcError as e:
+        print(f"[HEARTBEAT ERROR] {node_id}: {e}")
 
 
 def main():
-    parser = argparse.ArgumentParser(
-        description="ARCHON Distributed Zone Node"
-    )
+    parser = argparse.ArgumentParser()
 
     parser.add_argument("--id", required=True)
-    parser.add_argument("--port", required=True, type=int)
-
-    parser.add_argument(
-        "--host",
-        default="localhost"
-    )
-
-    parser.add_argument(
-        "--coordinator",
-        default="localhost"
-    )
+    parser.add_argument("--host", default="localhost")
+    parser.add_argument("--port", type=int, required=True)
+    parser.add_argument("--coordinator", default="localhost")
 
     args = parser.parse_args()
 
-    print("=" * 50)
-    print("        ARCHON - DISTRIBUTED ZONE NODE")
-    print("=" * 50)
+    print()
+    print("================================")
+    print("       ARCHON ZONE NODE")
+    print("================================")
     print(f"Node ID : {args.id}")
     print(f"Host    : {args.host}")
     print(f"Port    : {args.port}")
     print("Status  : ONLINE")
-    print("=" * 50)
+    print("================================")
+    print()
 
-    register_with_coordinator(
-        args.id,
-        args.host,
-        args.port,
-        args.coordinator
-    )
+    stub = None
 
-    try:
-        while True:
-            timestamp = datetime.now().strftime(
-                "%Y-%m-%d %H:%M:%S"
+    # Keep trying until Coordinator is available
+    while stub is None:
+        try:
+            stub = register_with_coordinator(
+                args.id,
+                args.host,
+                args.port,
+                args.coordinator
             )
+        except grpc.RpcError as e:
+            print(f"[REGISTRATION ERROR] {e}")
+            print("[REGISTRATION] Retrying in 3 seconds...")
+            time.sleep(3)
 
-            print(
-                f"[{timestamp}] "
-                f"{args.id} is monitoring the archaeological site..."
-            )
+    # Send heartbeat every 5 seconds
+    while True:
+        send_heartbeat(stub, args.id)
 
-            time.sleep(5)
+        print(
+            f"[MONITORING] {args.id} is monitoring "
+            "the archaeological site..."
+        )
 
-    except KeyboardInterrupt:
-        print(f"\n{args.id} shutting down...")
-        print("Status: OFFLINE")
+        time.sleep(5)
 
 
 if __name__ == "__main__":

@@ -39,6 +39,11 @@ class ArchonCoordinatorStub:
                 request_serializer=archon__pb2.NodeRegistration.SerializeToString,
                 response_deserializer=archon__pb2.NodeRegistrationResponse.FromString,
                 _registered_method=True)
+        self.Heartbeat = channel.unary_unary(
+                '/archon.ArchonCoordinator/Heartbeat',
+                request_serializer=archon__pb2.HeartbeatRequest.SerializeToString,
+                response_deserializer=archon__pb2.HeartbeatResponse.FromString,
+                _registered_method=True)
         self.GetZoneStatus = channel.unary_unary(
                 '/archon.ArchonCoordinator/GetZoneStatus',
                 request_serializer=archon__pb2.ZoneRequest.SerializeToString,
@@ -50,6 +55,12 @@ class ArchonCoordinatorServicer:
     """Missing associated documentation comment in .proto file."""
 
     def RegisterNode(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def Heartbeat(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -68,6 +79,11 @@ def add_ArchonCoordinatorServicer_to_server(servicer, server):
                     servicer.RegisterNode,
                     request_deserializer=archon__pb2.NodeRegistration.FromString,
                     response_serializer=archon__pb2.NodeRegistrationResponse.SerializeToString,
+            ),
+            'Heartbeat': grpc.unary_unary_rpc_method_handler(
+                    servicer.Heartbeat,
+                    request_deserializer=archon__pb2.HeartbeatRequest.FromString,
+                    response_serializer=archon__pb2.HeartbeatResponse.SerializeToString,
             ),
             'GetZoneStatus': grpc.unary_unary_rpc_method_handler(
                     servicer.GetZoneStatus,
@@ -102,6 +118,33 @@ class ArchonCoordinator:
             '/archon.ArchonCoordinator/RegisterNode',
             archon__pb2.NodeRegistration.SerializeToString,
             archon__pb2.NodeRegistrationResponse.FromString,
+            options,
+            channel_credentials,
+            insecure,
+            call_credentials,
+            compression,
+            wait_for_ready,
+            timeout,
+            metadata,
+            _registered_method=True)
+
+    @staticmethod
+    def Heartbeat(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(
+            request,
+            target,
+            '/archon.ArchonCoordinator/Heartbeat',
+            archon__pb2.HeartbeatRequest.SerializeToString,
+            archon__pb2.HeartbeatResponse.FromString,
             options,
             channel_credentials,
             insecure,

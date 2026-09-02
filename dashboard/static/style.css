@@ -1,0 +1,275 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background: #f4f1ea;
+    color: #29261f;
+    min-height: 100vh;
+}
+
+.topbar {
+    background: #24231f;
+    color: white;
+    padding: 24px 6%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.topbar h1 {
+    font-size: 30px;
+    letter-spacing: 4px;
+}
+
+.topbar p {
+    color: #bdb8aa;
+    margin-top: 5px;
+}
+
+.system-status {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 14px;
+}
+
+.status-dot {
+    width: 9px;
+    height: 9px;
+    background: #72a66a;
+    border-radius: 50%;
+}
+
+.container {
+    width: 88%;
+    max-width: 1400px;
+    margin: 35px auto;
+}
+
+.overview {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin-bottom: 38px;
+}
+
+.overview-card {
+    background: white;
+    border: 1px solid #ded9cc;
+    border-radius: 14px;
+    padding: 22px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+}
+
+.card-label {
+    display: block;
+    color: #817b6e;
+    font-size: 12px;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.overview-card strong {
+    font-size: 25px;
+}
+
+.online-text {
+    color: #568050;
+}
+
+.section-heading {
+    margin-bottom: 18px;
+}
+
+.section-heading h2,
+.panel-header h2 {
+    font-size: 21px;
+}
+
+.section-heading p,
+.panel-header p {
+    color: #817b6e;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+.zone-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+}
+
+.zone-card {
+    background: white;
+    border: 1px solid #ded9cc;
+    border-radius: 16px;
+    padding: 22px;
+    box-shadow: 0 5px 18px rgba(0,0,0,0.05);
+}
+
+.zone-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 25px;
+}
+
+.zone-header h3 {
+    font-size: 20px;
+}
+
+.zone-id {
+    color: #938d7e;
+    font-size: 11px;
+    letter-spacing: 1px;
+}
+
+.zone-status {
+    font-size: 11px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.zone-status span {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #72a66a;
+}
+
+.sensor-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 10px;
+}
+
+.sensor {
+    background: #f7f5ef;
+    border-radius: 10px;
+    padding: 13px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sensor span {
+    color: #777165;
+    font-size: 13px;
+}
+
+.sensor strong {
+    font-size: 16px;
+}
+
+.lower-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-top: 30px;
+}
+
+.panel {
+    background: white;
+    border: 1px solid #ded9cc;
+    border-radius: 16px;
+    padding: 22px;
+}
+
+.panel-header {
+    margin-bottom: 20px;
+}
+
+.empty-state {
+    background: #f7f5ef;
+    border-radius: 10px;
+    padding: 25px;
+    text-align: center;
+    color: #777165;
+}
+
+.empty-state span {
+    display: block;
+    font-size: 25px;
+    margin-bottom: 8px;
+}
+
+.artifact {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    padding: 14px 0;
+    border-bottom: 1px solid #eeeae1;
+}
+
+.artifact:last-child {
+    border-bottom: none;
+}
+
+.artifact-icon {
+    width: 42px;
+    height: 42px;
+    border-radius: 10px;
+    background: #f1ede4;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 21px;
+}
+
+.artifact strong {
+    font-size: 14px;
+}
+
+.artifact p {
+    color: #888274;
+    font-size: 12px;
+    margin-top: 3px;
+}
+
+.artifact-status {
+    margin-left: auto;
+    font-size: 10px;
+    font-weight: bold;
+    color: #568050;
+}
+
+footer {
+    text-align: center;
+    color: #918b7e;
+    font-size: 12px;
+    padding: 25px;
+}
+
+@media (max-width: 900px) {
+
+    .overview {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .zone-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .lower-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 600px) {
+
+    .topbar {
+        flex-direction: column;
+        gap: 15px;
+        align-items: flex-start;
+    }
+
+    .overview {
+        grid-template-columns: 1fr;
+    }
+}

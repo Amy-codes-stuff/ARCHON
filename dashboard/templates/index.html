@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>ARCHON | Archaeological Monitoring</title>
+
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header class="topbar">
+        <div>
+            <h1>ARCHON</h1>
+            <p>Archaeological Site Monitoring System</p>
+        </div>
+
+        <div class="system-status">
+            <span class="status-dot"></span>
+            <span>System Operational</span>
+        </div>
+    </header>
+
+
+    <main class="container">
+
+        <!-- OVERVIEW -->
+        <section class="overview">
+
+            <div class="overview-card">
+                <span class="card-label">ACTIVE ZONES</span>
+                <strong id="active-zones">3 / 3</strong>
+            </div>
+
+            <div class="overview-card">
+                <span class="card-label">SYSTEM STATUS</span>
+                <strong class="online-text">ONLINE</strong>
+            </div>
+
+            <div class="overview-card">
+                <span class="card-label">RECENT ALERTS</span>
+                <strong id="alert-count">0</strong>
+            </div>
+
+            <div class="overview-card">
+                <span class="card-label">LAST UPDATE</span>
+                <strong id="last-update">--:--:--</strong>
+            </div>
+
+        </section>
+
+
+        <!-- ZONES -->
+        <section>
+
+            <div class="section-heading">
+                <div>
+                    <h2>Archaeological Zones</h2>
+                    <p>Real-time status of distributed monitoring nodes</p>
+                </div>
+            </div>
+
+            <div class="zone-grid">
+
+                <!-- ZONE A -->
+                <div class="zone-card">
+
+                    <div class="zone-header">
+                        <div>
+                            <h3>Zone A</h3>
+                            <span class="zone-id">ZONE_A</span>
+                        </div>
+
+                        <span class="zone-status online">
+                            <span></span> ONLINE
+                        </span>
+                    </div>
+
+                    <div class="sensor-grid">
+
+                        <div class="sensor">
+                            <span>🌡️ Temperature</span>
+                            <strong id="zone-a-temperature">-- °C</strong>
+                        </div>
+
+                        <div class="sensor">
+                            <span>💧 Humidity</span>
+                            <strong id="zone-a-humidity">-- %</strong>
+                        </div>
+
+                        <div class="sensor">
+                            <span>🌱 Soil Moisture</span>
+                            <strong id="zone-a-soil">-- %</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ZONE B -->
+                <div class="zone-card">
+
+                    <div class="zone-header">
+                        <div>
+                            <h3>Zone B</h3>
+                            <span class="zone-id">ZONE_B</span>
+                        </div>
+
+                        <span class="zone-status online">
+                            <span></span> ONLINE
+                        </span>
+                    </div>
+
+                    <div class="sensor-grid">
+
+                        <div class="sensor">
+                            <span>🌡️ Temperature</span>
+                            <strong id="zone-b-temperature">-- °C</strong>
+                        </div>
+
+                        <div class="sensor">
+                            <span>💧 Humidity</span>
+                            <strong id="zone-b-humidity">-- %</strong>
+                        </div>
+
+                        <div class="sensor">
+                            <span>🌱 Soil Moisture</span>
+                            <strong id="zone-b-soil">-- %</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!-- ZONE C -->
+                <div class="zone-card">
+
+                    <div class="zone-header">
+                        <div>
+                            <h3>Zone C</h3>
+                            <span class="zone-id">ZONE_C</span>
+                        </div>
+
+                        <span class="zone-status online">
+                            <span></span> ONLINE
+                        </span>
+                    </div>
+
+                    <div class="sensor-grid">
+
+                        <div class="sensor">
+
+                            <span>🌡️ Temperature</span>
+                            <strong id="zone-c-temperature">-- °C</strong>
+                        </div>
+
+                        <div class="sensor">
+                            <span>💧 Humidity</span>
+                            <strong id="zone-c-humidity">-- %</strong>
+                        </div>
+
+                        <div class="sensor">
+                            <span>🌱 Soil Moisture</span>
+                            <strong id="zone-c-soil">-- %</strong>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- LOWER SECTION -->
+        <section class="lower-grid">
+
+            <!-- ALERTS -->
+            <div class="panel">
+
+                <div class="panel-header">
+                    <div>
+                        <h2>Recent Alerts</h2>
+                        <p>Site events and monitoring notifications</p>
+                    </div>
+                </div>
+
+                <div id="alerts" class="alerts">
+
+                    <div class="empty-state">
+                        <span>✓</span>
+                        <p>No recent alerts</p>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+            <!-- ARTIFACTS -->
+            <div class="panel">
+
+                <div class="panel-header">
+                    <div>
+                        <h2>Artifact Monitoring</h2>
+                        <p>Protected archaeological assets</p>
+                    </div>
+                </div>
+
+                <div class="artifact">
+
+                    <div class="artifact-icon">
+                        🏺
+                    </div>
+
+                    <div>
+                        <strong>Artifact Registry</strong>
+                        <p>Monitoring protected archaeological artifacts</p>
+                    </div>
+
+                    <span class="artifact-status">
+                        STABLE
+                    </span>
+
+                </div>
+
+                <div class="artifact">
+
+                    <div class="artifact-icon">
+                        🗿
+                    </div>
+
+                    <div>
+                        <strong>Heritage Structure</strong>
+                        <p>Structural condition monitoring</p>
+                    </div>
+
+                    <span class="artifact-status">
+                        STABLE
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <footer>
+        ARCHON Distributed Archaeological Monitoring System
+    </footer>
+
+    <script src="/static/app.js"></script>
+
+</body>
+</html>
