@@ -1,3 +1,4 @@
+
 pipeline {
     agent any
 
@@ -15,17 +16,20 @@ pipeline {
 
         stage('Build') {
             steps {
+                echo 'Checking Python version...'
+                bat '"C:\\Users\\tiwar\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe" --version'
+
                 echo 'Checking Python syntax...'
-                bat 'python --version'
-                bat 'python -m compileall -q communication coordinator dashboard nodes'
-                echo 'Python syntax check completed.'
+                bat '"C:\\Users\\tiwar\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe" -m compileall -q communication coordinator dashboard nodes'
+
+                echo 'Python syntax check completed successfully.'
             }
         }
 
         stage('Test') {
             steps {
                 echo 'Running ARCHON middleware smoke test...'
-                bat 'python nodes\\middleware_test.py'
+                bat '"C:\\Users\\tiwar\\AppData\\Local\\Python\\pythoncore-3.14-64\\python.exe" nodes\\middleware_test.py'
             }
         }
 
@@ -41,6 +45,7 @@ pipeline {
         success {
             echo 'ARCHON CI/CD pipeline completed successfully!'
         }
+
         failure {
             echo 'ARCHON CI/CD pipeline failed. Check the stage logs.'
         }
